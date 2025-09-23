@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
-import { SUMMER_PRODUCTS, COFFEE_PRODUCTS } from '../constants/Data';
 import Colors from '../constants/Colors';
+import { COFFEE_PRODUCTS, SUMMER_PRODUCTS } from '../constants/Data';
 
-const HomeScreen = () => {
+type HomeScreenProps = {
+  onProductPress?: (product: any) => void;
+};
+
+const HomeScreen = ({ onProductPress }: HomeScreenProps) => {
   return (
     <View style={styles.container}>
       <Header />
@@ -13,13 +17,25 @@ const HomeScreen = () => {
         <Text style={styles.sectionTitle}>For this summer</Text>
         <View style={styles.productsContainer}>
           {SUMMER_PRODUCTS.map(product => (
-            <ProductCard key={product.id} name={product.name} price={product.price} imageUrl={product.imageUrl} />
+            <ProductCard 
+              key={product.id} 
+              name={product.name} 
+              price={product.price} 
+              imageUrl={product.imageUrl}
+              onPress={() => onProductPress?.(product)}
+            />
           ))}
         </View>
         <Text style={styles.sectionTitle}>Coffee</Text>
         <View style={styles.productsContainer}>
           {COFFEE_PRODUCTS.map(product => (
-            <ProductCard key={product.id} name={product.name} price={product.price} imageUrl={product.imageUrl} />
+            <ProductCard 
+              key={product.id} 
+              name={product.name} 
+              price={product.price} 
+              imageUrl={product.imageUrl}
+              onPress={() => onProductPress?.(product)}
+            />
           ))}
         </View>
       </ScrollView>

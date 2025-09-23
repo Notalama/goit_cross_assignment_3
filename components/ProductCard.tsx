@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../constants/Colors';
 
 const { width } = Dimensions.get('window');
@@ -9,11 +9,12 @@ type ProductCardProps = {
   name: string;
   price: number | string;
   imageUrl?: string;
+  onPress?: () => void;
 };
 
-const ProductCard = ({ name, price, imageUrl }: ProductCardProps) => {
+const ProductCard = ({ name, price, imageUrl, onPress }: ProductCardProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
       {imageUrl ? (
         <Image source={{ uri: imageUrl }} style={styles.imagePlaceholder} />
       ) : (
@@ -23,7 +24,7 @@ const ProductCard = ({ name, price, imageUrl }: ProductCardProps) => {
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.price}>€ {price}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

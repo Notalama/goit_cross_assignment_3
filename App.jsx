@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableOpacity } from 'react-native';
-import HomeScreen from '@/screens/HomeScreen';
+import Colors from '@/constants/Colors';
 import CartScreen from '@/screens/CartScreen';
 import CheckoutScreen from '@/screens/CheckoutScreen';
-import Colors from '@/constants/Colors';
+import HomeScreen from '@/screens/HomeScreen';
+import ProductDetailsScreen from '@/screens/ProductDetailsScreen'; // Import the new screen
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState('Home');
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleProductPress = (product) => {
+    setSelectedProduct(product);
+    setCurrentScreen('ProductDetails');
+  };
+
+  const handleCheckout = () => {
+    setCurrentScreen('Checkout');
+  };
 
   const renderScreen = () => {
     switch (currentScreen) {
       case 'Home':
-        return <HomeScreen />;
+        return <HomeScreen onProductPress={handleProductPress} />;
       case 'Cart':
-        return <CartScreen onCheckout={() => setCurrentScreen('Checkout')} />;
+        return <CartScreen onCheckout={handleCheckout} />;
       case 'Checkout':
         return <CheckoutScreen />;
+      case 'ProductDetails':
+        return <ProductDetailsScreen product={selectedProduct} onClose={() => setCurrentScreen('Home')} />;
       default:
-        return <HomeScreen />;
+        return <HomeScreen onProductPress={handleProductPress} />;
     }
   };
 
@@ -29,13 +43,20 @@ const App = () => {
         {/* Simple Navigation Menu for Demonstration */}
         <View style={styles.navigationBar}>
           <TouchableOpacity onPress={() => setCurrentScreen('Home')} style={styles.navButton}>
-            <Text style={styles.navText}>Home</Text>
+            <Ionicons 
+              name="compass-outline" 
+              size={24} 
+              color={currentScreen === 'Home' ? Colors.primary : Colors.text} 
+            />
+            <Text style={[styles.navText, { color: currentScreen === 'Home' ? Colors.primary : Colors.text }]}>Home</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setCurrentScreen('Cart')} style={styles.navButton}>
-            <Text style={styles.navText}>Cart</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setCurrentScreen('Checkout')} style={styles.navButton}>
-            <Text style={styles.navText}>Checkout</Text>
+            <Ionicons 
+              name="bag-handle-outline" 
+              size={24} 
+              color={currentScreen === 'Cart' ? Colors.primary : Colors.text} 
+            />
+            <Text style={[styles.navText, { color: currentScreen === 'Cart' ? Colors.primary : Colors.text }]}>Cart</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -67,10 +88,13 @@ const styles = StyleSheet.create({
   },
   navButton: {
     padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   navText: {
     fontSize: 16,
     color: Colors.text,
+    marginTop: 4,
   },
 });
 
