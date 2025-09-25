@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, ListRenderItem, useWindowDimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { NavigationProp } from '@react-navigation/native';
 import CartItem from '../components/CartItem';
 import { CART_ITEMS } from '../constants/Data';
-import Colors from '../constants/Colors';
+import colors from '../constants/colors';
+import { productsStackRoutes, tabRoutes } from '../navigation/route';
 
 type CartItemData = {
   id: string;
@@ -12,11 +15,8 @@ type CartItemData = {
   quantity: number;
 };
 
-type CartScreenProps = {
-  onCheckout?: () => void;
-};
-
-const CartScreen: React.FC<CartScreenProps> = ({ onCheckout }) => {
+const CartScreen: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<any>>();
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 360;
   const checkoutButtonHeight = isSmallScreen ? 44 : 52;
@@ -44,7 +44,7 @@ const CartScreen: React.FC<CartScreenProps> = ({ onCheckout }) => {
       <TouchableOpacity
         style={[styles.checkoutButton, { height: checkoutButtonHeight }]}
         activeOpacity={0.8}
-        onPress={onCheckout}
+        onPress={() => navigation.navigate(tabRoutes.CART_TAB, { screen: productsStackRoutes.CHECKOUT })}
       >
         <Text style={[styles.checkoutButtonText, { fontSize: checkoutFontSize }]}>Checkout</Text>
       </TouchableOpacity>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     borderTopWidth: 1,
-    borderTopColor: Colors.border,
+    borderTopColor: colors.border,
   },
   totalLabel: {
     fontSize: 18,
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
   totalPrice: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: Colors.text,
+    color: colors.text,
   },
   checkoutButton: {
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.primary,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
