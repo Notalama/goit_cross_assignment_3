@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 
 const PaymentMethodCard = ({ title, description, isSelected, onPress }) => (
   <TouchableOpacity style={[styles.card, isSelected && styles.selectedCard]} onPress={onPress}>

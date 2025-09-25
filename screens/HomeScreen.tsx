@@ -1,14 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import { COFFEE_PRODUCTS, SUMMER_PRODUCTS } from '../constants/Data';
-import { productsStackRoutes } from '../navigation/route';
 
-const ProductListScreen = () => {
-  const navigation = useNavigation<any>();
+type HomeScreenProps = {
+  onProductPress?: (product: any) => void;
+};
+
+const HomeScreen = ({ onProductPress }: HomeScreenProps) => {
   return (
     <View style={styles.container}>
       <Header />
@@ -21,10 +22,7 @@ const ProductListScreen = () => {
               name={product.name} 
               price={product.price} 
               imageUrl={product.imageUrl}
-              onPress={() => {
-                console.log(product);
-                return navigation.navigate(productsStackRoutes.PRODUCT_DETAILS, { product });
-              }}
+              onPress={() => onProductPress?.(product)}
             />
           ))}
         </View>
@@ -36,9 +34,7 @@ const ProductListScreen = () => {
               name={product.name} 
               price={product.price} 
               imageUrl={product.imageUrl}
-              onPress={() => {
-                return navigation.navigate(productsStackRoutes.PRODUCT_DETAILS, { product });
-              }}
+              onPress={() => onProductPress?.(product)}
             />
           ))}
         </View>
@@ -69,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductListScreen;
+export default HomeScreen;

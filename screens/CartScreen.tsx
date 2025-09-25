@@ -1,11 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, ListRenderItem, useWindowDimensions, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import type { NavigationProp } from '@react-navigation/native';
 import CartItem from '../components/CartItem';
 import { CART_ITEMS } from '../constants/Data';
-import colors from '../constants/colors';
-import { productsStackRoutes, tabRoutes } from '../navigation/route';
+import Colors from '../constants/Colors';
 
 type CartItemData = {
   id: string;
@@ -15,8 +12,11 @@ type CartItemData = {
   quantity: number;
 };
 
-const CartScreen: React.FC = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+type CartScreenProps = {
+  onCheckout?: () => void;
+};
+
+const CartScreen: React.FC<CartScreenProps> = ({ onCheckout }) => {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 360;
   const checkoutButtonHeight = isSmallScreen ? 44 : 52;
@@ -44,7 +44,7 @@ const CartScreen: React.FC = () => {
       <TouchableOpacity
         style={[styles.checkoutButton, { height: checkoutButtonHeight }]}
         activeOpacity={0.8}
-        onPress={() => navigation.navigate(tabRoutes.CART_TAB, { screen: productsStackRoutes.CHECKOUT })}
+        onPress={onCheckout}
       >
         <Text style={[styles.checkoutButtonText, { fontSize: checkoutFontSize }]}>Checkout</Text>
       </TouchableOpacity>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     borderTopWidth: 1,
-    borderTopColor: colors.border,
+    borderTopColor: Colors.border,
   },
   totalLabel: {
     fontSize: 18,
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
   totalPrice: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: colors.text,
+    color: Colors.text,
   },
   checkoutButton: {
-    backgroundColor: colors.primary,
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',

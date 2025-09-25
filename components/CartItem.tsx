@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import colors from '../constants/colors';
+import Colors from '../constants/Colors';
 
 type CartItemProps = {
   name: string;
@@ -22,11 +22,11 @@ const CartItem: React.FC<CartItemProps> = ({ name, price, quantity }) => {
         <Text style={styles.name}>{name}</Text>
         <View style={styles.quantityContainer}>
           <TouchableOpacity style={[styles.quantityButton, { width: buttonSize, height: buttonSize, borderRadius: buttonSize / 2 }]}>
-            <Ionicons name="remove-outline" size={iconSize} color={colors.text} />
+            <Ionicons name="remove-outline" size={iconSize} color={Colors.text} />
           </TouchableOpacity>
           <Text style={[styles.quantityText, { fontSize: quantityFontSize }]}>{quantity}</Text>
           <TouchableOpacity style={[styles.quantityButton, { width: buttonSize, height: buttonSize, borderRadius: buttonSize / 2 }]}>
-            <Ionicons name="add-outline" size={iconSize} color={colors.text} />
+            <Ionicons name="add-outline" size={iconSize} color={Colors.text} />
           </TouchableOpacity>
         </View>
       </View>
@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    borderBottomColor: Colors.border,
   },
   imagePlaceholder: {
     width: 60,
     height: 60,
-    backgroundColor: colors.cardBackground,
+    backgroundColor: Colors.cardBackground,
     borderRadius: 8,
   },
   details: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: '500',
-    color: colors.text,
+    color: Colors.text,
     marginBottom: 5,
   },
   quantityContainer: {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12.5,
-    backgroundColor: colors.border,
+    backgroundColor: Colors.border,
   },
   quantityText: {
     marginHorizontal: 10,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 16,
     fontWeight: '600',
-    color: colors.text,
+    color: Colors.text,
   },
 });
 

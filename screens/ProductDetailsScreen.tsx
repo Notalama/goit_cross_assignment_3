@@ -1,16 +1,21 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors from '../constants/colors';
-import { productsStackRoutes, tabRoutes } from '../navigation/route';
+import Colors from '../constants/Colors';
 
-const { width } = Dimensions.get('window'); 
+const { width } = Dimensions.get('window');
 
 const ProductDetailsScreen = ({ route, navigation }: { route: any, navigation: any }) => {
   const { product } = route.params || {};
-  console.log(product);
   return (
     <View style={styles.container}>
+      {/* Top Header with Close Button */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.closeButton}>
+          <Ionicons name="close" size={30} color={Colors.text} />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Product Page</Text>
+      </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Product Image Carousel */}
@@ -44,7 +49,8 @@ const ProductDetailsScreen = ({ route, navigation }: { route: any, navigation: a
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.addToCartButton} onPress={() => navigation.navigate(tabRoutes.CART_TAB, { screen: productsStackRoutes.CHECKOUT })}>
+      {/* "Add to cart" Button */}
+      <TouchableOpacity style={styles.addToCartButton}>
         <Ionicons name="add" size={20} color="#fff" />
         <Text style={styles.addToCartText}>Add to cart</Text>
       </TouchableOpacity>
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
   },
   imagePlaceholder: {
     width: width,
-    // height: '100%',
+    height: '100%',
     backgroundColor: Colors.border,
   },
   paginationDots: {
