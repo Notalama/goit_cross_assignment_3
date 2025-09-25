@@ -3,7 +3,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import { COFFEE_PRODUCTS, SUMMER_PRODUCTS } from '../constants/Data';
 import { productsStackRoutes } from '../navigation/route';
 

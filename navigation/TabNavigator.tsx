@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import colors from "../constants/colors";
+import colors from "../constants/Colors";
 import ProductsStack from "./StackNavigator";
 import { tabRoutes } from "./route";
 import { TabsParamList } from "./types";

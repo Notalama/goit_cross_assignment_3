@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 import { productsStackRoutes, tabRoutes } from '../navigation/route';
 
 const { width } = Dimensions.get('window'); 

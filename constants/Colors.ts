@@ -1,4 +1,4 @@
-const Colors = {
+const colors = {
   primary: '#007AFF', // A standard blue for buttons
   secondary: '#E8E8E8', // A light grey for backgrounds
   text: '#333333', // Dark text
@@ -7,4 +7,4 @@ const Colors = {
   border: '#D3D3D3',
 };
 
-export default Colors;
+export default colors;

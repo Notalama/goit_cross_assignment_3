@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '@react-navigation/native';
 import CartItem from '../components/CartItem';
 import { CART_ITEMS } from '../constants/Data';
-import colors from '../constants/colors';
+import colors from '../constants/Colors';
 import { productsStackRoutes, tabRoutes } from '../navigation/route';
 
 type CartItemData = {
