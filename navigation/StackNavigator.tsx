@@ -1,26 +1,30 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import HomeScreen from "../screens/HomeScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { productsStackRoutes } from "./route";
+import { ProductsStackParamList } from "./types";
+import ProductListScreen from "../screens/ProductListScreen";
 import ProductDetailsScreen from "../screens/ProductDetailsScreen";
+import CheckoutScreen from "../screens/CheckoutScreen";
 
-const Stack = createStackNavigator();
-export const productStackRoutes = {
-  PRODUCT_LIST: "product_list",
-  PRODUCT_DETAILS: "product_details",
-};
+const Stack = createStackNavigator<ProductsStackParamList>();
 
-export default function ProductStack() {
+export default function ProductsStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={productStackRoutes.PRODUCT_LIST}
-        component={HomeScreen}
+        name={productsStackRoutes.PRODUCT_LIST}
+        component={ProductListScreen}
         options={{ title: "Explore" }}
       />
       <Stack.Screen
-        name={productStackRoutes.PRODUCT_DETAILS}
+        name={productsStackRoutes.PRODUCT_DETAILS}
         component={ProductDetailsScreen}
         options={{ title: "Product details" }}
+      />
+      <Stack.Screen
+        name={productsStackRoutes.CHECKOUT}
+        component={CheckoutScreen}
+        options={{ title: "Checkout" }}
       />
     </Stack.Navigator>
   );

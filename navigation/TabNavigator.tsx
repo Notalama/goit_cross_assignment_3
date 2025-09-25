@@ -1,48 +1,48 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import colors from "../constants/colors";
+import ProductsStack from "./StackNavigator";
+import { tabRoutes } from "./route";
+import { TabsParamList } from "./types";
+import CartScreen from "../screens/CartScreen";
+import CheckoutScreen from "../screens/CheckoutScreen";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { MaterialIcons } from '@expo/vector-icons';
+const Tab = createBottomTabNavigator<TabsParamList>();
 
-// Import your screen components
-import CartScreen from '@/screens/CartScreen';
-import HomeScreen from '@/screens/HomeScreen';
+export default function AppTabs() {
+  const getTabBarIcon = (routeName: string, color: string, size: number) => {
+    const iconMap: Record<string, string> = {
+      [tabRoutes.CART_TAB]: "compass",
+      [tabRoutes.EXPLORE_TAB]: "cart-outline",
+    };
 
-const Tab = createBottomTabNavigator();
+    const iconName = iconMap[routeName] || "ellipse";
 
-export default function TabNavigator() {
-  const colorScheme = useColorScheme();
+    return <Ionicons name={iconName} size={size} color={color} />;
+  };
 
   return (
     <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tabIconSelected,
-        headerShown: false,
-        tabBarButton: HapticTab,
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => getTabBarIcon(route.name, color, size),
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.placeholder,
         tabBarStyle: {
-          backgroundColor: 'white',
-          paddingVertical: 5,
           height: 60,
-          borderTopColor: ' transparent',
-        },
-      }}>
+        }
+      })}
+      initialRouteName={tabRoutes.CART_TAB}
+    >
       <Tab.Screen
-        name="Explore"
-        component={HomeScreen}
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="explore" color={color} />,
-        }}
+        name={tabRoutes.CART_TAB}
+        component={ProductsStack}
+        options={{ headerShown: false, title: "Explore" }}
       />
       <Tab.Screen
-        name="Cart"
+        name={tabRoutes.EXPLORE_TAB}
         component={CartScreen}
-        options={{
-          title: 'Cart',
-          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-cart" color={color} />,
-        }}
+        options={{ title: "Cart" }}
       />
     </Tab.Navigator>
   );

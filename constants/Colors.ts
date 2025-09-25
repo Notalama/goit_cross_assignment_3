@@ -1,5 +1,3 @@
-import { Platform } from 'react-native';
-
 const Colors = {
   primary: '#007AFF', // A standard blue for buttons
   secondary: '#E8E8E8', // A light grey for backgrounds

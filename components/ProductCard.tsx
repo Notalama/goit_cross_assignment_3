@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors from '../constants/Colors';
+import Colors from '../constants/colors';
 
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 48) / 2; // (Total width - padding on both sides - spacing between) / 2 cards
