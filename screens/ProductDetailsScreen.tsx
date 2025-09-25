@@ -5,12 +5,13 @@ import Colors from '../constants/Colors';
 
 const { width } = Dimensions.get('window');
 
-const ProductDetailsScreen = ({ product, onClose }: { product: any, onClose: () => void }) => {
+const ProductDetailsScreen = ({ route, navigation }: { route: any, navigation: any }) => {
+  const { product } = route.params || {};
   return (
     <View style={styles.container}>
       {/* Top Header with Close Button */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.closeButton}>
           <Ionicons name="close" size={30} color={Colors.text} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Product Page</Text>
